@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/muhammedceliksoz/AndroidStudioProjects/emojiGame/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/muhammedceliksoz/AndroidStudioProjects/emojiGame/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/muhammedceliksoz/AndroidStudioProjects/emojiGame/app/src/main/res/layout/activity_question_page.xml" value="0.25" />
+        <entry key="..\:/Users/muhammedceliksoz/AndroidStudioProjects/emojiGame/app/src/main/res/layout/question_page.xml" value="0.15760869565217392" />
         <entry key="..\:/Users/muhammedceliksoz/AndroidStudioProjects/emojiGame/app/src/main/res/layout/text_view_emoji.xml" value="0.16" />
       </map>
     </option>
