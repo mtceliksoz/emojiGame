@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,23 +23,28 @@ import org.json.JSONObject;
 
 public class QuestionPageActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    EditText etDescription,etChoice_1,etChoice_2,etChoice_3,etChoice_4,etAnswer;
+    EditText etDescription, etAnswer;
+    RadioGroup choices;
+    RadioButton btnChoice_1,btnChoice_2,btnChoice_3,btnChoice_4;
+
+
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EmojiManager.install(new GoogleEmojiProvider());
         setContentView(R.layout.activity_question_page);
-        etDescription=findViewById(R.id.etDescription);
-        etChoice_1=findViewById(R.id.etChoice_1);
-        etChoice_2=findViewById(R.id.etChoice_2);
-        etChoice_3=findViewById(R.id.etChoice_3);
-        etChoice_4=findViewById(R.id.etChoice_4);
-        etAnswer=findViewById(R.id.etAnswer);
+        etDescription = findViewById(R.id.etDescription);
+        btnChoice_1 = findViewById(R.id.btnChoice_1);
+        btnChoice_2 = findViewById(R.id.btnChoice_2);
+        btnChoice_3 = findViewById(R.id.btnChoice_3);
+        btnChoice_4 = findViewById(R.id.btnChoice_4);
+        choices = findViewById(R.id.choices);
+        etAnswer = findViewById(R.id.etAnswer);
 
 
-
-        String url ="http://elsishirdavat.com/Emoji/";
+        String url = "http://elsishirdavat.com/Emoji/";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -52,14 +60,14 @@ public class QuestionPageActivity extends AppCompatActivity {
                             String answer = response.getString("answer");
 
                             etDescription.setText("Question: " + description);
-                            etChoice_1.setText("Choice 1: " + choice_1);
-                            etChoice_2.setText("Choice 2: " + choice_2);
-                            etChoice_3.setText("Choice 3: " + choice_3);
-                            etChoice_4.setText("Choice 4: " + choice_4);
+                            btnChoice_1.setText("Choice 1: " + choice_1);
+                            btnChoice_2.setText("Choice 2: " + choice_2);
+                            btnChoice_3.setText("Choice 3: " + choice_3);
+                            btnChoice_4.setText("Choice 4: " + choice_4);
                             etAnswer.setVisibility(View.INVISIBLE);
-                            etAnswer.setText("answer: "+answer);
+                            etAnswer.setText("answer: " + answer);
 
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -73,18 +81,39 @@ public class QuestionPageActivity extends AppCompatActivity {
                 });
 
 
-
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
 
-
-        Button btnAnswer=findViewById(R.id.btnAnswer);
+        Button btnAnswer = findViewById(R.id.btnAnswer);
         btnAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int selectedId = choices.getCheckedRadioButtonId();
 
-                etAnswer.setVisibility(View.VISIBLE);
+                if(findViewById(selectedId)==findViewById(R.id.btnChoice_1)){
+                    Toast.makeText(QuestionPageActivity.this, "incorrect answer!", Toast.LENGTH_SHORT).show();
+                    etAnswer.setVisibility(View.VISIBLE);
 
+                }
+                else if(findViewById(selectedId)==findViewById(R.id.btnChoice_2)){
+                    Toast.makeText(QuestionPageActivity.this, "incorrect answer!", Toast.LENGTH_SHORT).show();
+                    etAnswer.setVisibility(View.VISIBLE);
+
+                }
+                else if(findViewById(selectedId)==findViewById(R.id.btnChoice_3)){
+                    Toast.makeText(QuestionPageActivity.this, "correct answer!", Toast.LENGTH_SHORT).show();
+                    etAnswer.setVisibility(View.VISIBLE);
+
+                }
+                else if(findViewById(selectedId)==findViewById(R.id.btnChoice_4)){
+                    Toast.makeText(QuestionPageActivity.this, "incorrect answer!", Toast.LENGTH_SHORT).show();
+                    etAnswer.setVisibility(View.VISIBLE);
+
+                }
+                else {
+                    Toast.makeText(QuestionPageActivity.this, "select a choice!", Toast.LENGTH_SHORT).show();
+
+                }
 
 
 
@@ -93,16 +122,15 @@ public class QuestionPageActivity extends AppCompatActivity {
     }
 
     public static int toUnicode(String emoji) {
-        String text="";
-        if(emoji.length()>2) {
+        String text = "";
+        if (emoji.length() > 2) {
             text = emoji.substring(0, 2);
-        }
-        else{
+        } else {
             text = emoji;
         }
         StringBuffer sb = new StringBuffer();
-        int codePoint=0;
-        String hex="";
+        int codePoint = 0;
+        String hex = "";
         for (int i = 0; i < text.length(); i++) {
             codePoint = text.codePointAt(i);
             // Skip over the second char in a surrogate pair
@@ -116,7 +144,7 @@ public class QuestionPageActivity extends AppCompatActivity {
             }
             sb.append(hex);
         }
-        int unicode = Integer.parseInt(hex, 16) ;
+        int unicode = Integer.parseInt(hex, 16);
         return unicode;
     }
 

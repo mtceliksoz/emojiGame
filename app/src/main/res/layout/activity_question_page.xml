@@ -9,60 +9,9 @@
 
 
     <com.vanniktech.emoji.EmojiEditText
-        android:id="@+id/etChoice_4"
-        android:layout_width="285dp"
-        android:layout_height="65dp"
-        android:textColor="@android:color/white"
-        app:emojiSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAnswer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.943" />
-
-    <com.vanniktech.emoji.EmojiEditText
-        android:id="@+id/etChoice_3"
-        android:layout_width="285dp"
-        android:layout_height="65dp"
-        android:textColor="@android:color/white"
-        app:emojiSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAnswer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
-
-    <com.vanniktech.emoji.EmojiEditText
-        android:id="@+id/etChoice_2"
-        android:layout_width="285dp"
-        android:layout_height="65dp"
-        android:textColor="@android:color/white"
-        app:emojiSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAnswer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.587" />
-
-    <com.vanniktech.emoji.EmojiEditText
-        android:id="@+id/etChoice_1"
-        android:layout_width="285dp"
-        android:layout_height="65dp"
-        android:textColor="@android:color/white"
-        app:emojiSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAnswer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.406" />
-
-    <com.vanniktech.emoji.EmojiEditText
         android:id="@+id/etAnswer"
-        android:layout_width="256dp"
-        android:layout_height="75dp"
+        android:layout_width="297dp"
+        android:layout_height="50dp"
         android:textColor="@android:color/white"
         app:emojiSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -74,26 +23,58 @@
 
     <com.vanniktech.emoji.EmojiEditText
         android:id="@+id/etDescription"
-        android:layout_width="262dp"
-        android:layout_height="81dp"
+        android:layout_width="279dp"
+        android:layout_height="56dp"
         android:textColor="@android:color/white"
         app:emojiSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/btnAnswer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.179" />
+        app:layout_constraintVertical_bias="0.067" />
 
     <Button
         android:id="@+id/btnAnswer"
-        android:layout_width="147dp"
-        android:layout_height="50dp"
-        android:text="Show the answer"
+        android:layout_width="174dp"
+        android:layout_height="47dp"
+        android:text="answer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784" />
+        app:layout_constraintVertical_bias="0.724" />
 
+    <RadioGroup
+        android:id="@+id/choices"
+        android:layout_width="298dp"
+        android:layout_height="245dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAnswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDescription">
+
+        <RadioButton
+            android:id="@+id/btnChoice_1"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="choice1" />
+
+        <RadioButton
+            android:id="@+id/btnChoice_2"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="choice2" />
+
+        <RadioButton
+            android:id="@+id/btnChoice_3"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="choice3" />
+
+        <RadioButton
+            android:id="@+id/btnChoice_4"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="choice4" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
