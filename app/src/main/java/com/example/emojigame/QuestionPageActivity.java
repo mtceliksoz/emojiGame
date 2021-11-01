@@ -2,7 +2,9 @@ package com.example.emojigame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -35,6 +37,12 @@ public class QuestionPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EmojiManager.install(new GoogleEmojiProvider());
         setContentView(R.layout.activity_question_page);
+
+        SharedPrefManager sharedPrefManager = new SharedPrefManager(getApplicationContext());
+
+        Bundle data=getIntent().getExtras();
+        String username=data.getString("username");
+
         etDescription = findViewById(R.id.etDescription);
         btnChoice_1 = findViewById(R.id.btnChoice_1);
         btnChoice_2 = findViewById(R.id.btnChoice_2);
@@ -88,32 +96,63 @@ public class QuestionPageActivity extends AppCompatActivity {
         btnAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int selectedId = choices.getCheckedRadioButtonId();
+                //Log.d(TAG,"username : " + SharedPrefManager.getUsername());
 
-                if(findViewById(selectedId)==findViewById(R.id.btnChoice_1)){
-                    Toast.makeText(QuestionPageActivity.this, "incorrect answer!", Toast.LENGTH_SHORT).show();
-                    etAnswer.setVisibility(View.VISIBLE);
+                if(sharedPrefManager.getQuestionNumber()>=4) {
+                    sharedPrefManager.endGame();
+                    Intent intent = new Intent(QuestionPageActivity.this, MainActivity.class);
 
-                }
-                else if(findViewById(selectedId)==findViewById(R.id.btnChoice_2)){
-                    Toast.makeText(QuestionPageActivity.this, "incorrect answer!", Toast.LENGTH_SHORT).show();
-                    etAnswer.setVisibility(View.VISIBLE);
+                    startActivity(intent);
 
                 }
-                else if(findViewById(selectedId)==findViewById(R.id.btnChoice_3)){
-                    Toast.makeText(QuestionPageActivity.this, "correct answer!", Toast.LENGTH_SHORT).show();
-                    etAnswer.setVisibility(View.VISIBLE);
+                else{
+
+                    int selectedId = choices.getCheckedRadioButtonId();
+
+                    if (findViewById(selectedId) == findViewById(R.id.btnChoice_1)) {
+                        etAnswer.setVisibility(View.VISIBLE);
+                        int questionNumber = sharedPrefManager.getQuestionNumber();
+                        int point = sharedPrefManager.getPoint();
+                        Toast.makeText(QuestionPageActivity.this, "incorrect answer! your point is: "+Integer.toString(point), Toast.LENGTH_SHORT).show();
+
+                        sharedPrefManager.setValues(username,point,questionNumber+1);
+
+                    } else if (findViewById(selectedId) == findViewById(R.id.btnChoice_2)) {
+                        etAnswer.setVisibility(View.VISIBLE);
+                        int questionNumber = sharedPrefManager.getQuestionNumber();
+                        int point = sharedPrefManager.getPoint();
+                        Toast.makeText(QuestionPageActivity.this, "incorrect answer! your point is: "+Integer.toString(point), Toast.LENGTH_SHORT).show();
+
+                        sharedPrefManager.setValues(username,point,questionNumber+1);
+
+                    } else if (findViewById(selectedId) == findViewById(R.id.btnChoice_3)) {
+                        etAnswer.setVisibility(View.VISIBLE);
+                        int questionNumber = sharedPrefManager.getQuestionNumber();
+                        int point = sharedPrefManager.getPoint();
+                        Toast.makeText(QuestionPageActivity.this, "correct answer! your point is: "+Integer.toString(point+1), Toast.LENGTH_SHORT).show();
+
+                        sharedPrefManager.setValues(username,point+1,questionNumber+1);
+
+                    } else if (findViewById(selectedId) == findViewById(R.id.btnChoice_4)) {
+                        etAnswer.setVisibility(View.VISIBLE);
+                        int questionNumber = sharedPrefManager.getQuestionNumber();
+                        int point = sharedPrefManager.getPoint();
+                        Toast.makeText(QuestionPageActivity.this, "incorrect answer! your point is: "+Integer.toString(point), Toast.LENGTH_SHORT).show();
+
+                        sharedPrefManager.setValues(username,point,questionNumber+1);
+
+                    } else {
+                        Toast.makeText(QuestionPageActivity.this, "select a choice!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    Intent intent = new Intent(QuestionPageActivity.this, QuestionPageActivity.class);
+
+                    intent.putExtra("username",username);
+                    startActivity(intent);
 
                 }
-                else if(findViewById(selectedId)==findViewById(R.id.btnChoice_4)){
-                    Toast.makeText(QuestionPageActivity.this, "incorrect answer!", Toast.LENGTH_SHORT).show();
-                    etAnswer.setVisibility(View.VISIBLE);
 
-                }
-                else {
-                    Toast.makeText(QuestionPageActivity.this, "select a choice!", Toast.LENGTH_SHORT).show();
-
-                }
 
 
 
